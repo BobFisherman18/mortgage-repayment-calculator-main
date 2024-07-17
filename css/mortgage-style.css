@@ -1,0 +1,84 @@
+body {
+  font-family: "Plus Jakarta Sans";
+  background-color: hsl(202, 86%, 94%);
+}
+body #calculate {
+  background-color: hsl(0, 0%, 100%);
+  padding-top: 35px;
+  padding-bottom: 35px;
+  /* Chrome, Safari, Edge, Opera: hide arrows */
+  /* Firefox: hide arrows */
+}
+body #calculate h2 {
+  color: hsl(202, 55%, 16%);
+  font-weight: 700;
+}
+body #calculate input[type=reset] {
+  color: hsl(200, 24%, 40%);
+  background-color: hsl(0, 0%, 100%);
+  border: none;
+  text-decoration: underline;
+}
+body #calculate label {
+  font-weight: 500;
+  color: hsl(200, 24%, 40%);
+}
+body #calculate span {
+  background-color: hsl(202, 86%, 94%);
+  color: hsl(200, 24%, 40%);
+  font-weight: 700;
+}
+body #calculate #amount {
+  border-left: none;
+}
+body #calculate #term, body #calculate #rate {
+  border-right: none;
+}
+body #calculate input::-webkit-outer-spin-button,
+body #calculate input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+body #calculate input[type=number] {
+  -moz-appearance: textfield;
+}
+body #calculate input[type=number], body #calculate .input-group-text {
+  border-color: hsl(200, 26%, 54%);
+}
+body #calculate input[type=number]:hover {
+  border-color: hsl(202, 55%, 16%);
+}
+body #calculate div.form-check > input[type=radio], body #calculate div.form-check {
+  border: 1px solid hsl(200, 24%, 40%);
+}
+body #calculate div.form-check > label {
+  color: hsl(202, 55%, 16%);
+  font-weight: 700;
+}
+body #calculate .form-check:hover {
+  border-color: hsl(61, 70%, 52%);
+}
+body #calculate button {
+  background-color: hsl(61, 70%, 52%);
+  color: hsl(202, 55%, 16%);
+  font-weight: 700;
+  padding: 15px;
+  font-size: 1.1rem;
+}
+body #calculate button > img {
+  position: relative;
+  right: 15px;
+  bottom: 2px;
+}
+body #calculate button:hover {
+  background-color: hsla(61, 70%, 52%, 0.5);
+}
+body #results {
+  background-color: hsl(202, 55%, 16%);
+}
+body #results h1 {
+  color: hsl(0, 0%, 100%);
+}
+body #results p {
+  color: hsl(203, 41%, 72%);
+}

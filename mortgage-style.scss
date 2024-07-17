@@ -1,0 +1,100 @@
+$lime: hsl(61, 70%, 52%);
+$red: hsl(4, 69%, 50%);
+
+$white: hsl(0, 0%, 100%);
+$slate100: hsl(202, 86%, 94%);
+$slate300: hsl(203, 41%, 72%);
+$slate500: hsl(200, 26%, 54%);
+$slate700: hsl(200, 24%, 40%);
+$slate900: hsl(202, 55%, 16%);
+
+$submitHover: hsla(61, 70%, 52%, 0.5);
+$size: 16px;
+
+$l-weight: 500;
+$h-weight: 700;
+
+body {
+    font-family: "Plus Jakarta Sans";
+    background-color: $slate100;
+    #calculate {
+        background-color: $white;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        h2 {
+            color: $slate900;
+            font-weight: $h-weight;
+        }
+        input[type="reset"] {
+            color: $slate700;
+            background-color: $white;
+            border: none;
+            text-decoration: underline;
+        }
+        label {
+            font-weight: $l-weight;
+            color: $slate700;
+        }
+        span {
+            background-color: $slate100;
+            color: $slate700;
+            font-weight: $h-weight;
+        }
+        #amount {
+            border-left: none;
+        }
+        #term, #rate {
+            border-right: none;
+        }
+        /* Chrome, Safari, Edge, Opera: hide arrows */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Firefox: hide arrows */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"], .input-group-text {
+            border-color: $slate500;
+        }
+        input[type="number"]:hover {
+            border-color: $slate900;
+        }
+        div.form-check > input[type="radio"], div.form-check {
+            border: 1px solid $slate700;
+        }
+        div.form-check > label {
+            color: $slate900;
+            font-weight: $h-weight;
+        }
+        .form-check:hover {
+            border-color: $lime;
+        }
+        button {
+            background-color: $lime;
+            color: $slate900;
+            font-weight: $h-weight;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+        button > img {
+            position: relative;
+            right: 15px;
+            bottom: 2px;
+        }
+        button:hover {
+            background-color: $submitHover;
+        }
+    }
+    #results {
+        background-color: $slate900;
+        h1 {
+            color: $white;
+        }
+        p {
+            color: $slate300;
+        }
+    }
+}
