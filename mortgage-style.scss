@@ -10,6 +10,7 @@ $slate900: hsl(202, 55%, 16%);
 
 $submitHover: hsla(61, 70%, 52%, 0.5);
 $size: 16px;
+$radiusSize: 20px;
 
 $l-weight: 500;
 $h-weight: 700;
@@ -59,9 +60,10 @@ body {
         input[type="number"], .input-group-text {
             border-color: $slate500;
         }
-        input[type="number"]:hover {
+        span:hover {
             border-color: $slate900;
         }
+        
         div.form-check > input[type="radio"], div.form-check {
             border: 1px solid $slate700;
         }
@@ -78,6 +80,9 @@ body {
             font-weight: $h-weight;
             padding: 15px;
             font-size: 1.1rem;
+            b {
+                font-weight: $h-weight;
+            }
         }
         button > img {
             position: relative;
@@ -96,5 +101,106 @@ body {
         p {
             color: $slate300;
         }
+    }
+}
+@media screen and (min-width: 576px) {
+    #mortgage {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 100px;       
+        #calculate {
+            padding-right: 100px !important;
+            border-top-left-radius: $radiusSize;
+            border-bottom-left-radius: $radiusSize;
+            #headAndResetField {
+                display: flex;
+                justify-content: space-around;
+            }
+            #termAndRateField {
+               display: flex;
+               justify-content: space-around;
+            }
+            button {
+                img {
+                    right: 35px;
+                    top: 10px;
+                }
+                b {
+                    position: relative;
+                    right: 15px;
+                }
+            }
+        }
+        #results {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom-left-radius: 100px;
+            z-index: 1;
+            margin-left: -75px;
+            border-top-right-radius: $radiusSize;
+            border-bottom-right-radius: $radiusSize;
+        }
+    }
+}
+@media screen and (min-width: 627px) {
+    #mortgage {
+        #calculate {
+            #termField {
+                width: 47.5%;
+                margin-left: -7px;
+            }
+            #rateField {
+                width: 47.5%;
+                margin-right: -7px;
+            }
+            img {
+                right: 2px !important;
+                top: -1px !important;
+            }
+            b {
+                right: 2px !important;
+            }
+         }
+    }
+}
+@media screen and (min-width: 696px) {
+    button {
+       max-width: 284.467px;
+    }
+}
+@media screen and (min-width: 768px) {
+    #termField {
+        width: 48% !important;
+        margin-left: -7px;
+    }
+    #rateField {
+        width: 48% !important;
+        margin-right: -7px;
+    }
+    
+}
+@media screen and (min-width: 840px) { 
+    #headAndResetField {
+        justify-content: space-between !important;
+    }
+    h2 {
+        font-size: 22px;
+    }
+    h1 {
+        font-size: 25px;
+    }
+}
+@media screen and (min-width: 910px) {
+    #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #mortgage {
+        max-width: 909px;
+        align-content: center;
     }
 }
