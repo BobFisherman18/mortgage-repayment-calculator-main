@@ -48,6 +48,18 @@ body #calculate input[type=number], body #calculate .input-group-text {
 body #calculate span:hover {
   border-color: hsl(202, 55%, 16%);
 }
+body #calculate .input-group:focus-within {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  z-index: 3;
+  border-radius: 0.25rem;
+}
+body #calculate .input-group .form-control:focus {
+  box-shadow: none !important;
+}
 body #calculate div.form-check > input[type=radio], body #calculate div.form-check {
   border: 1px solid hsl(200, 24%, 40%);
 }
@@ -75,6 +87,10 @@ body #calculate button > img {
 }
 body #calculate button:hover {
   background-color: hsla(61, 70%, 52%, 0.5);
+}
+body #calculate .was-validated .errorStates {
+  color: hsl(4, 69%, 50%);
+  font-weight: 500;
 }
 body #results {
   background-color: hsl(202, 55%, 16%);
