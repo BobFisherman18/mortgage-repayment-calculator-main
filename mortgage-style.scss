@@ -32,6 +32,9 @@ body {
             border: none;
             text-decoration: underline;
         }
+        input[type="reset"]:hover {
+            color: $slate900;
+        }
         label {
             font-weight: $l-weight;
             color: $slate700;
@@ -40,6 +43,14 @@ body {
             background-color: $slate100;
             color: $slate700;
             font-weight: $h-weight;
+        }
+        .errorSpan {
+            color: $white;
+            background-color: $red;
+            border-color: $red !important;
+        } 
+        .errorInput {
+            border-color: $red !important;
         }
         #amount {
             border-left: none;
@@ -103,14 +114,6 @@ body {
         button:hover {
             background-color: $submitHover;
         }
-        .was-validated {
-            //background-color: green;
-            .errorStates {
-                color: $red;
-                font-weight: $l-weight;
-            }
-        }
-
     }
     #results {
         background-color: $slate900;

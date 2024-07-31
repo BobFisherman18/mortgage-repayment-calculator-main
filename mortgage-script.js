@@ -1,6 +1,7 @@
-const amountInput = document.getElementById('amount');
-const amountSpan = document.getElementById('currency');
 const errorFields = document.querySelectorAll('p.errorStates');
+const inputHoverStates = document.querySelectorAll('.hover');
+const inputValidity = document.querySelectorAll("input[type='number'], input[type='radio']");
+console.log(inputHoverStates);
 
 console.log(errorFields);
 const noErrors = new Map([
@@ -14,34 +15,79 @@ const errorStates = new Map([
 
 ]);
 
-amountInput.addEventListener('mouseenter', mouseEnter);
-amountInput.addEventListener('mouseleave', mouseLeave);
-
-function mouseEnter() {
-    amountInput.style.borderColor = hoverStates.get('slate900');
-    amountSpan.style.borderColor = hoverStates.get('slate900');
-}
-
-function mouseLeave() {
-    amountInput.style.borderColor = noErrors.get('slate500');
-    amountSpan.style.borderColor = noErrors.get('slate500');
-}
-
-(() => {
-    'use strict'
+function sortInputs() {
+  const sortedInputObjects = {}; 
+  const amountFieldArray = [];
+  const termFieldArray = [];
+  const rateFieldArray = [];
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-    console.log(forms);
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
+  for (let y of inputHoverStates) {
+   y.classList.forEach( (ele) => {
+    if (ele.startsWith("amountField")) {
+      amountFieldArray.push(y);
+      sortedInputObjects.amount = amountFieldArray;
+    } else if (ele.startsWith('termField')) {
+      termFieldArray.push(y);
+      sortedInputObjects.term = termFieldArray;
+    } else if (ele.startsWith('rateField')) {
+      rateFieldArray.push(y);
+      sortedInputObjects.rate = rateFieldArray;
+    }
+   });
+  }
+  return sortedInputObjects;
+}
+const sortedInputs = sortInputs();
+
+function hover(inputStates) {
+  for (let x of inputStates) {
+    x.addEventListener('mouseenter', () => {
+        for (let i of inputStates) {
+          i.style.borderColor = hoverStates.get('slate900');
+      }
+    });
+    x.addEventListener('mouseleave', () => {
+      for (let i of inputStates) {
+        i.style.borderColor = noErrors.get('slate500');
+      }
+
+    });
+  }
+}
+hover(sortedInputs.amount);
+hover(sortedInputs.term);
+hover(sortedInputs.rate);
+
+function checkFields() {
+  for (let z of inputValidity) {
+    let inputTypes = z.type;
+    //console.log(inputTypes);
+    switch(inputTypes) {
+      case "number":
+        //console.log("number:");
+        console.log(z.value);
+        if (z.value === ""){
+          errorStatesClass();
         }
-          err
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
+        break;
+      case "radio":
+        //console.log("radio:");
+       // console.log(z);
+    }
+  }
+}
+
+function errorStatesClass() {
+  for (let a of inputHoverStates) {
+    let tagName = a.tagName;
+    switch (tagName) {
+      case "SPAN":
+        a.classList.add("errorSpan");
+        break;
+      case "INPUT":
+        a.classList.add("errorInput");
+        break;
+    }
+  }
+}
+//errorStatesClass();

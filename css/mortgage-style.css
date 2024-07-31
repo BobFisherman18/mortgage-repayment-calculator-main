@@ -19,6 +19,9 @@ body #calculate input[type=reset] {
   border: none;
   text-decoration: underline;
 }
+body #calculate input[type=reset]:hover {
+  color: hsl(202, 55%, 16%);
+}
 body #calculate label {
   font-weight: 500;
   color: hsl(200, 24%, 40%);
@@ -27,6 +30,14 @@ body #calculate span {
   background-color: hsl(202, 86%, 94%);
   color: hsl(200, 24%, 40%);
   font-weight: 700;
+}
+body #calculate .errorSpan {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(4, 69%, 50%);
+  border-color: hsl(4, 69%, 50%) !important;
+}
+body #calculate .errorInput {
+  border-color: hsl(4, 69%, 50%) !important;
 }
 body #calculate #amount {
   border-left: none;
@@ -87,10 +98,6 @@ body #calculate button > img {
 }
 body #calculate button:hover {
   background-color: hsla(61, 70%, 52%, 0.5);
-}
-body #calculate .was-validated .errorStates {
-  color: hsl(4, 69%, 50%);
-  font-weight: 500;
 }
 body #results {
   background-color: hsl(202, 55%, 16%);

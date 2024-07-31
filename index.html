@@ -48,19 +48,21 @@
       <main id="mortgage">
         <!-- Empty results start -->
         <main class="container-sm px-4" id="calculate">
-          <form action="" class="needs-validation" novalidate>
+          <form action="">
             <div id="headAndResetField">
               <h2>Mortgage Calculator</h2>
               <input type="reset" class="d-block" value="Clear All" />
             </div>
             <label for="amount" class="form-label mt-3">Mortgage Amount</label>
             <div class="input-group">
-              <span class="input-group-text" id="currency">£</span>
+              <span class="input-group-text hover amountField" id="currency"
+                >£</span
+              >
               <input
                 type="number"
                 name="amount"
                 id="amount"
-                class="form-control py-2"
+                class="form-control py-2 hover amountField"
                 min="1"
                 required
               />
@@ -74,12 +76,14 @@
                     type="number"
                     name="term"
                     id="term"
-                    class="form-control py-2"
+                    class="form-control py-2 hover termField"
                     min="1"
                     max="99"
                     required
                   />
-                  <span class="input-group-text" id="year">years</span>
+                  <span class="input-group-text hover termField" id="year"
+                    >years</span
+                  >
                 </div>
                 <p class="errorStates"></p>
               </section>
@@ -90,11 +94,13 @@
                     type="number"
                     name="rate"
                     id="rate"
-                    class="form-control py-2"
+                    class="form-control py-2 hover rateField"
                     min="1"
                     required
                   />
-                  <span class="input-group-text" id="percent">%</span>
+                  <span class="input-group-text hover rateField" id="percent"
+                    >%</span
+                  >
                 </div>
                 <p class="errorStates"></p>
               </section>
@@ -125,7 +131,11 @@
             </div>
             <p class="errorStates"></p>
             <div class="d-grid">
-              <button type="submit" class="btn rounded-pill">
+              <button
+                type="submit"
+                class="btn rounded-pill"
+                onclick="checkFields()"
+              >
                 <img
                   src="./assets/images/icon-calculator.svg"
                   alt="Calculator"
