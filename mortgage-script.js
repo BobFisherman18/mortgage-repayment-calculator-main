@@ -1,7 +1,6 @@
 const errorFields = document.querySelectorAll('p.errorStates');
 const inputHoverStates = document.querySelectorAll('.hover');
 const inputValidity = document.querySelectorAll("input[type='number'], input[type='radio']");
-console.log(inputHoverStates);
 
 console.log(errorFields);
 const noErrors = new Map([
@@ -38,6 +37,7 @@ function sortInputs() {
   return sortedInputObjects;
 }
 const sortedInputs = sortInputs();
+//console.log(sortedInputs);
 
 function hover(inputStates) {
   for (let x of inputStates) {
@@ -65,29 +65,62 @@ function checkFields() {
     switch(inputTypes) {
       case "number":
         //console.log("number:");
-        console.log(z.value);
-        if (z.value === ""){
-          errorStatesClass();
-        }
+        errorStatesClass();
         break;
       case "radio":
         //console.log("radio:");
        // console.log(z);
+       break;
     }
   }
 }
 
 function errorStatesClass() {
-  for (let a of inputHoverStates) {
-    let tagName = a.tagName;
-    switch (tagName) {
-      case "SPAN":
-        a.classList.add("errorSpan");
-        break;
-      case "INPUT":
-        a.classList.add("errorInput");
-        break;
+  const arr = [];
+  for (let a in sortedInputs) {
+    //console.log(sortedInputs[a]);
+    arr.push(sortedInputs[a]);
+  }
+  //console.log(arr);
+  for (let b of arr) {
+    console.log(b);
+    for (let c of b) {
+      let numberValue = Number(c.value);
+      let tagName = c.tagName;
+      switch (tagName) {
+        case "SPAN":
+        //console.log(c);
+          break;
+        case "INPUT":
+          //console.log(c);
+          if (!numberValue) {
+            c.classList.add("errorInput");
+            //b.classList.add("errorSpan");
+          } else {
+            c.classList.remove("errorInput");
+          }
+          break;
+      } 
     }
   }
 }
-//errorStatesClass();
+errorStatesClass();
+/*
+let tagName = a.tagName;
+switch (tagName) {
+  case "SPAN":
+    if (!a.value) {
+      a.classList.add("errorSpan");
+    } else {
+      a.classList.remove("errorSpan");
+    }
+    break;
+  case "INPUT":
+    if (!a.value) {
+      a.classList.add("errorInput");
+    } else {
+      a.classList.remove("errorInput");
+    }
+    break;
+}
+*/
