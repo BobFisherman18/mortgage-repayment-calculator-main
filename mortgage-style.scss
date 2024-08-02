@@ -52,6 +52,12 @@ body {
         .errorInput {
             border-color: $red !important;
         }
+        .errorStates {
+            color: $red;
+            margin: 10px 0;
+            font-weight: $l-weight;
+            font-size: small;
+        }
         #amount {
             border-left: none;
         }

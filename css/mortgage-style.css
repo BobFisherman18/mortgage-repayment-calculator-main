@@ -39,6 +39,12 @@ body #calculate .errorSpan {
 body #calculate .errorInput {
   border-color: hsl(4, 69%, 50%) !important;
 }
+body #calculate .errorStates {
+  color: hsl(4, 69%, 50%);
+  margin: 10px 0;
+  font-weight: 500;
+  font-size: small;
+}
 body #calculate #amount {
   border-left: none;
 }
