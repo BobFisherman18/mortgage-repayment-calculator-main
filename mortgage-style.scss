@@ -7,6 +7,7 @@ $slate300: hsl(203, 41%, 72%);
 $slate500: hsl(200, 26%, 54%);
 $slate700: hsl(200, 24%, 40%);
 $slate900: hsl(202, 55%, 16%);
+$slate1100: hsl(200, 53%, 10%);
 
 $submitHover: hsla(61, 70%, 52%, 0.5);
 $size: 16px;
@@ -122,12 +123,37 @@ body {
         }
     }
     #results {
-        background-color: $slate900;
-        h1 {
-            color: $white;
-        }
-        p {
-            color: $slate300;
+
+            background-color: $slate900;
+            h1 {
+                color: $white;
+            }
+            p {
+                color: $slate300;
+            }
+        #resultsCompletedField {
+            h2 {
+                font-weight: $h-weight;
+                color: $white;
+            }
+            section {
+                background-color: $slate1100;
+                border-top-color: $lime !important;
+                h6 {
+                    color: $slate300;
+                }
+                #monthyPaymentField {
+                    border-bottom-color: $slate900 !important;
+                    #monthlyPayments {
+                        color: $lime;
+                        font-weight: $h-weight;
+                        font-size: 35px;
+                    }
+                 }
+                #termPayments {
+                    color: $white; 
+                }
+            }
         }
     }
 }

@@ -114,6 +114,28 @@ body #results h1 {
 body #results p {
   color: hsl(203, 41%, 72%);
 }
+body #results #resultsCompletedField h2 {
+  font-weight: 700;
+  color: hsl(0, 0%, 100%);
+}
+body #results #resultsCompletedField section {
+  background-color: hsl(200, 53%, 10%);
+  border-top-color: hsl(61, 70%, 52%) !important;
+}
+body #results #resultsCompletedField section h6 {
+  color: hsl(203, 41%, 72%);
+}
+body #results #resultsCompletedField section #monthyPaymentField {
+  border-bottom-color: hsl(202, 55%, 16%) !important;
+}
+body #results #resultsCompletedField section #monthyPaymentField #monthlyPayments {
+  color: hsl(61, 70%, 52%);
+  font-weight: 700;
+  font-size: 35px;
+}
+body #results #resultsCompletedField section #termPayments {
+  color: hsl(0, 0%, 100%);
+}
 
 @media screen and (min-width: 576px) {
   #mortgage {
