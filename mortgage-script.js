@@ -4,7 +4,6 @@ const inputValidity = document.querySelectorAll("input[type='number'], input[typ
 let text = 'Your results are shown below based on the information you provided.'+ 
             'To adjust the results, edit the form and click '+ "calculate repayments "+ 
             'again.'
-//console.log(errorFields);
 const noErrors = new Map([
     ['slate500', 'hsl(200, 26%, 54%)']
 ]);
@@ -49,7 +48,6 @@ function sortInputs() {
   return sortedInputObjects;
 }
 const sortedInputs = sortInputs();
-//console.log(sortedInputs);
 
 function hover(inputStates) {
   for (let x of inputStates) {
@@ -73,42 +71,41 @@ hover(sortedInputs.rate);
 function checkFields() {
   for (let z of inputValidity) {
     let inputTypes = z.type;
-    //console.log(inputTypes);
     switch(inputTypes) {
       case "number":
-        //console.log("number:");
         checkNumbers();
         break;
       case "radio":
-        //console.log("radio:");
-       // console.log(z);
        checkOptions();
        break;
     }
   }
+  createMortgageObject();
+  displayResults('resultsCompletedField', 'div', resultsContent);
+}
+function createMortgageObject() {
+  const mortgageNumbersArray = checkNumbers();
+  let radio = checkOptions();
+  let [amount, term, rate] = mortgageNumbersArray;
+  const mortgage = new mortgageObject(amount, term, rate, radio);
+  console.log(mortgage);
+  calculateMortgage(mortgage);
 }
 
 function checkNumbers() {
   const arr = [];
   const mortgageNumbersArray = [];
   for (let a in sortedInputs) {
-    //console.log(sortedInputs[a]);
     arr.push(sortedInputs[a]);
   }
-  //console.log(arr);
   for (let b of arr) {
-    //console.log(b);
     for (let c of b) {
-      //console.log(c.classList);
       c.classList.forEach((el) => {
         let tagName = c.tagName;
-        //console.log(el);
           if (el.startsWith("amountField")) {
             let amountNum = Number(c.value);
-            //console.log(tagName);
             switch (tagName) {
               case "INPUT":
-                //console.log(c);
                 let previousElementClass = c.previousElementSibling.classList;
                 let amountParentErrorState = c.parentElement.nextElementSibling;
                 if (!amountNum) {
@@ -123,13 +120,10 @@ function checkNumbers() {
                 }
               break;
             }
-
           } else if (el.startsWith("termField")) {
-            //console.log(c);
             let termNum = Number(c.value);
             switch (tagName) {
               case "INPUT":
-                //console.log(c);
                 let nextElementClass = c.nextElementSibling.classList;
                 let termParentErrorState = c.parentElement.nextElementSibling;
                 if (!termNum) {
@@ -145,11 +139,9 @@ function checkNumbers() {
               break;
             } 
           } else if (el.startsWith("rateField")) {
-            //console.log(c);
             let rateNum = Number(c.value);
             switch (tagName) {
               case "INPUT":
-                //console.log(c);
                 let nextElementClass = c.nextElementSibling.classList;
                 let rateParentErrorState = c.parentElement.nextElementSibling;
                 if (!rateNum) {
@@ -170,27 +162,21 @@ function checkNumbers() {
   }
   return mortgageNumbersArray;
 }
-//checkNumbers();
 
 //resusable code; if we add more input radios in the future, it is
 // not hard-coded
 function checkOptions() {
-  //console.log(inputValidity);
   const options = Array.from(inputValidity).slice(3);
-  //console.log(options);
   //returns last element of array
   let last = options.slice(-1);
   let error = last[0].parentElement.nextElementSibling;
-  //console.log(error);
   const radioChecked = [];
 
   for (let d of options) {
     radioChecked.push(d.checked);
   }
 
-  //console.log(radioChecked);
   let finalCheck = radioChecked.includes(true);
-  //console.log(finalCheck);
   finalCheck ? error.textContent = "" : 
               (error.textContent = errorStates.get("error"), 
               error.style.marginTop = "-15px", 
@@ -198,22 +184,15 @@ function checkOptions() {
   return finalCheck;
 }
 
-const mortgageNumbersArray = checkNumbers();
-let radio = checkOptions();
-let [amount, term, rate] = mortgageNumbersArray;
-const mortgage = new mortgageObject(amount, term, rate, radio);
-console.log(mortgage);
-
-function calculateMortgage() {
-  console.log(mortgage.intRate);
-  let p = mortgage.mortAmount;
-  let percentToDeci = mortgage.intRate / 100;
+async function calculateMortgage(mort) {
+  let p = mort.mortAmount;
+  let percentToDeci = mort.intRate / 100;
   let r = percentToDeci / 12;
-  let n = mortgage.mortTerm * 12;
+  let n = mort.mortTerm * 12;
   let M = p * [r * (1 + r) ** n] / [(1 + r)**n - 1];
-  console.log(M.toFixed(2));
+  let monthlyPayment = M.toFixed(2);
+  document.getElementById("monthlyPayments").innerHTML = await myPromise;
 }
-calculateMortgage();
 
 // Results Page
 const resultsContent = [
@@ -224,14 +203,12 @@ const resultsContent = [
       { element: 'div', class: 'border-bottom border-2', id: 'monthyPaymentField', 
         content: [
           { element: 'h6', class: 'mt-2', content: "Your monthly repayments" },
-          { element: 'h1', id: 'monthlyPayments', class: 'mb-3', content: '£5000.35' }
+          { element: 'h1', id: 'monthlyPayments', class: 'mb-3', content: `${calculateMortgage(mortgage)}` }
       ]},
       { element: 'h6', class: 'mt-3', content: "Total you'll repay over the term"},
       {element: 'h3', id: 'termPayments', content: '£539,622.26'}
     ]}
 ];
-console.log(resultsContent);
-displayResults('resultsCompletedField', 'div', resultsContent);
 
 function displayResults(parentId, tagName, items) {
   document.getElementById('resultsEmptyField').remove();
@@ -240,21 +217,10 @@ function displayResults(parentId, tagName, items) {
   granpaElement.appendChild(parentElement);
   parentElement.setAttribute('id', parentId);
   parentElement.setAttribute('class', "pt-4 mx-2");
- // console.log(parentElement);
  function checkArrayInObjects(arr) {
   return arr.some(element => Object.values(element).some(e => Array.isArray(e)));
 }
   for (let item of items) {
-    //console.log(item);
-    //containsNestedArray(items);
-    /*
-    function checkArrayInObjects(arr) {
-      return arr.some(element => 
-          typeof element === 'object' && !Array.isArray(element) && 
-          Object.values(element).some(value => Array.isArray(value))
-      );
-  }
-  */
     const childElement = document.createElement(item.element);
     if (!item.id) {
       childElement.setAttribute('class', item.class);
@@ -263,38 +229,55 @@ function displayResults(parentId, tagName, items) {
       childElement.setAttribute('id', item.id);
     }
     if(item.element !== "section") {
-      const node = document.createTextNode(item.content);
-      childElement.appendChild(node);
-      //console.log(childElement);
+      childElement.appendChild(document.createTextNode(item.content));
     } 
     else {
       if (checkArrayInObjects(items)) {
-        const resultsField = document.getElementById('resultsField');
-        const content = item.content;
-        console.log(item);
-        for (let c of content) {
-          //console.log(c.parentElement);
-
-        }
+        //I needed to set a Timeout method so I can get the ID of each parent element
+        setTimeout(() => {
+          const resultsField = document.getElementById('resultsField');
+          const content = item.content;
+          console.log(item);
+          for (let c of content) {
+            const grandChildElement = document.createElement(c.element);
+            resultsField.appendChild(grandChildElement);
+            if (!c.id) {
+              grandChildElement.setAttribute('class', c.class);
+            } else if (!c.class) {
+              grandChildElement.setAttribute('id', c.id);
+            }
+            else {
+              grandChildElement.setAttribute('class', c.class);
+              grandChildElement.setAttribute('id', c.id);
+            }
+            if (c.element !== 'div') {
+              grandChildElement.appendChild(document.createTextNode(c.content));
+            } 
+            else {
+              if(checkArrayInObjects(content)) {
+                setTimeout(() => {
+                  console.log(c);
+                  const monthyPaymentField = document.getElementById('monthyPaymentField');
+                  const monthyPayment = c.content;
+                  for (let paymentNumbers of monthyPayment) {
+                    const grandGrandChildElement = document.createElement(paymentNumbers.element);
+                    monthyPaymentField.appendChild(grandGrandChildElement);
+                    if(!paymentNumbers.id) {
+                      grandGrandChildElement.setAttribute('class', paymentNumbers.class);
+                      grandGrandChildElement.appendChild(document.createTextNode(paymentNumbers.content));
+                    } else {
+                      grandGrandChildElement.setAttribute('class', paymentNumbers.class);
+                      grandGrandChildElement.setAttribute('id', paymentNumbers.id);
+                      grandGrandChildElement.appendChild(document.createTextNode(paymentNumbers.content));
+                    }
+                  }
+                },500)
+              }
+            }
+          }
+        }, 500)
       }
     }
     parentElement.appendChild(childElement);
   }
-  /*
-  // Get the parent element
-  const parentElement = document.getElementById("results");
-  //parentElement.removeAttribute("class");
-  const node = document.createTextNode("This is a new paragraph.");
-  newElement.appendChild(node);
-  parentElement.appendChild(newElement);
-  
-  // Set the attributes and content
-  if (item.id) newElement.id = item.id;
-  if (item.class) newElement.className = item.class;
-  if (item.content) newElement.textContent = item.content;
-  
-  // Append the new element to the parent
-  parentElement.appendChild(newElement);
-  */
-
 }
