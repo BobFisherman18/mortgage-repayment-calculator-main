@@ -48,103 +48,101 @@
       <main id="mortgage">
         <!-- Empty results start -->
         <main class="container-sm px-4" id="calculate">
-          <form action="">
-            <div id="headAndResetField">
-              <h2>Mortgage Calculator</h2>
-              <input type="reset" class="d-block" value="Clear All" />
-            </div>
-            <label for="amount" class="form-label mt-3">Mortgage Amount</label>
-            <div class="input-group">
-              <span class="input-group-text hover amountField" id="currency"
-                >£</span
-              >
-              <input
-                type="number"
-                name="amount"
-                id="amount"
-                class="form-control py-2 hover amountField"
-                min="1"
-                required
-              />
-            </div>
-            <p class="errorStates"></p>
-            <div id="termAndRateField">
-              <section id="termField">
-                <label for="term" class="form-label mt-3">Mortgage Term</label>
-                <div class="input-group">
-                  <input
-                    type="number"
-                    name="term"
-                    id="term"
-                    class="form-control py-2 hover termField"
-                    min="1"
-                    max="99"
-                    required
-                  />
-                  <span class="input-group-text hover termField" id="year"
-                    >years</span
-                  >
-                </div>
-                <p class="errorStates"></p>
-              </section>
-              <section id="rateField">
-                <label for="rate" class="form-label mt-3">Interest Rate</label>
-                <div class="input-group">
-                  <input
-                    type="number"
-                    name="rate"
-                    id="rate"
-                    class="form-control py-2 hover rateField"
-                    min="1"
-                    required
-                  />
-                  <span class="input-group-text hover rateField" id="percent"
-                    >%</span
-                  >
-                </div>
-                <p class="errorStates"></p>
-              </section>
-            </div>
-            <label for="type" class="form-label mt-3">Mortgage Type</label>
-            <div class="form-check p-2 mb-2 rounded">
-              <input
-                type="radio"
-                name="mortgageType"
-                id="repay"
-                class="form-check-input mx-2"
-                required
-              />
-              <label for="mortgageType" class="form-check-label mx-2"
-                >Repayment</label
-              >
-            </div>
-            <div class="form-check p-2 mb-4 rounded">
-              <input
-                type="radio"
-                name="mortgageType"
-                id="interest"
-                class="form-check-input mx-2"
-              />
-              <label for="mortgageType" class="form-check-label mx-2"
-                >Interest Only</label
-              >
-            </div>
-            <p class="errorStates"></p>
-            <div class="d-grid">
-              <button
-                type="submit"
-                class="btn rounded-pill"
-                onclick="checkFields()"
-              >
-                <img
-                  src="./assets/images/icon-calculator.svg"
-                  alt="Calculator"
-                  class=""
+          <div id="headAndResetField">
+            <h2>Mortgage Calculator</h2>
+            <input type="reset" class="d-block" value="Clear All" />
+          </div>
+          <label for="amount" class="form-label mt-3">Mortgage Amount</label>
+          <div class="input-group">
+            <span class="input-group-text hover amountField" id="currency"
+              >£</span
+            >
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              class="form-control py-2 hover amountField"
+              min="1"
+              required
+            />
+          </div>
+          <p class="errorStates"></p>
+          <div id="termAndRateField">
+            <section id="termField">
+              <label for="term" class="form-label mt-3">Mortgage Term</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="term"
+                  id="term"
+                  class="form-control py-2 hover termField"
+                  min="1"
+                  max="99"
+                  required
                 />
-                <b>Calculate</b> Repayments
-              </button>
-            </div>
-          </form>
+                <span class="input-group-text hover termField" id="year"
+                  >years</span
+                >
+              </div>
+              <p class="errorStates"></p>
+            </section>
+            <section id="rateField">
+              <label for="rate" class="form-label mt-3">Interest Rate</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="rate"
+                  id="rate"
+                  class="form-control py-2 hover rateField"
+                  min="1"
+                  required
+                />
+                <span class="input-group-text hover rateField" id="percent"
+                  >%</span
+                >
+              </div>
+              <p class="errorStates"></p>
+            </section>
+          </div>
+          <label for="type" class="form-label mt-3">Mortgage Type</label>
+          <div class="form-check p-2 mb-2 rounded">
+            <input
+              type="radio"
+              name="mortgageType"
+              id="repay"
+              class="form-check-input mx-2"
+              required
+            />
+            <label for="mortgageType" class="form-check-label mx-2"
+              >Repayment</label
+            >
+          </div>
+          <div class="form-check p-2 mb-4 rounded">
+            <input
+              type="radio"
+              name="mortgageType"
+              id="interest"
+              class="form-check-input mx-2"
+            />
+            <label for="mortgageType" class="form-check-label mx-2"
+              >Interest Only</label
+            >
+          </div>
+          <p class="errorStates"></p>
+          <div class="d-grid">
+            <button
+              type="submit"
+              class="btn rounded-pill"
+              onclick="checkFields()"
+            >
+              <img
+                src="./assets/images/icon-calculator.svg"
+                alt="Calculator"
+                class=""
+              />
+              <b>Calculate</b> Repayments
+            </button>
+          </div>
         </main>
         <!-- Empty results end -->
         <!-- Completed results start -->

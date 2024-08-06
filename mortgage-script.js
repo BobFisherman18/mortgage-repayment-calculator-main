@@ -1,9 +1,9 @@
 const errorFields = document.querySelectorAll('p.errorStates');
 const inputHoverStates = document.querySelectorAll('.hover');
 const inputValidity = document.querySelectorAll("input[type='number'], input[type='radio']");
-let text = 'Your results are shown below based on the information you provided.'+ 
-            'To adjust the results, edit the form and click '+ "calculate repayments "+ 
-            'again.'
+let text = `Your results are shown below based on the information you provided. 
+            To adjust the results, edit the form and click  "calculate repayments" 
+            again.`
 const noErrors = new Map([
     ['slate500', 'hsl(200, 26%, 54%)']
 ]);
@@ -17,6 +17,22 @@ const errorStates = new Map([
 const changeResultsPage = new Map([
   ['para', text ]
 ]);
+
+// Results Page
+const resultsContent = [
+  { element: 'h2', class: 'mb-3', content: 'Your results' },
+  { element: 'p', class: 'mb-4', content: changeResultsPage.get('para') },
+  { element: "section", class: 'rounded p-3 mb-3 border-top border-4', id: "resultsField",
+    content: [
+      { element: 'div', class: 'border-bottom border-2', id: 'monthyPaymentField', 
+        content: [
+          { element: 'h6', class: 'mt-2', content: "Your monthly repayments" },
+          { element: 'h1', id: 'monthlyPayments', class: 'mb-3', content: `` }
+      ]},
+      { element: 'h6', class: 'mt-3', content: "Total you'll repay over the term"},
+      {element: 'h3', id: 'termPayments', content: '£539,622.26'}
+    ]}
+];
 class mortgageObject {
   constructor(amount, term, rate, type) {
     this.mortAmount = amount;
@@ -69,27 +85,26 @@ hover(sortedInputs.term);
 hover(sortedInputs.rate);
 
 function checkFields() {
-  for (let z of inputValidity) {
-    let inputTypes = z.type;
-    switch(inputTypes) {
-      case "number":
-        checkNumbers();
-        break;
-      case "radio":
-       checkOptions();
-       break;
-    }
+  checkNumbers();
+  checkOptions();
+  const checkMorgageObject = createMortgageObject();
+  console.log(checkMorgageObject);
+  const mortgageValues = Object.values(checkMorgageObject);
+  console.log(mortgageValues);
+
+  if (mortgageValues.includes(undefined) || mortgageValues.includes(false)) {
+    console.error("Include all fields!");
+  } else {
+    calculateMortgage(checkMorgageObject);
+    displayResults('resultsCompletedField', 'div', resultsContent);
   }
-  createMortgageObject();
-  displayResults('resultsCompletedField', 'div', resultsContent);
 }
 function createMortgageObject() {
   const mortgageNumbersArray = checkNumbers();
   let radio = checkOptions();
   let [amount, term, rate] = mortgageNumbersArray;
   const mortgage = new mortgageObject(amount, term, rate, radio);
-  console.log(mortgage);
-  calculateMortgage(mortgage);
+  return mortgage;
 }
 
 function checkNumbers() {
@@ -184,31 +199,26 @@ function checkOptions() {
   return finalCheck;
 }
 
-async function calculateMortgage(mort) {
+function calculateMortgage(mort) {
   let p = mort.mortAmount;
   let percentToDeci = mort.intRate / 100;
   let r = percentToDeci / 12;
   let n = mort.mortTerm * 12;
   let M = p * [r * (1 + r) ** n] / [(1 + r)**n - 1];
-  let monthlyPayment = M.toFixed(2);
-  document.getElementById("monthlyPayments").innerHTML = await myPromise;
+  let monthlyPayment = M.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+  console.log(monthlyPayment);
+  monthyPayments(monthlyPayment);
 }
 
-// Results Page
-const resultsContent = [
-  { element: 'h2', class: 'mb-3', content: 'Your results' },
-  { element: 'p', class: 'mb-4', content: changeResultsPage.get('para') },
-  { element: "section", class: 'rounded p-3 mb-3 border-top border-4', id: "resultsField",
-    content: [
-      { element: 'div', class: 'border-bottom border-2', id: 'monthyPaymentField', 
-        content: [
-          { element: 'h6', class: 'mt-2', content: "Your monthly repayments" },
-          { element: 'h1', id: 'monthlyPayments', class: 'mb-3', content: `${calculateMortgage(mortgage)}` }
-      ]},
-      { element: 'h6', class: 'mt-3', content: "Total you'll repay over the term"},
-      {element: 'h3', id: 'termPayments', content: '£539,622.26'}
-    ]}
-];
+function monthyPayments(some) {
+  setTimeout(() => {
+    document.getElementById('monthlyPayments').innerHTML = '£' + some;
+  },230);
+}
+
 
 function displayResults(parentId, tagName, items) {
   document.getElementById('resultsEmptyField').remove();
@@ -217,9 +227,9 @@ function displayResults(parentId, tagName, items) {
   granpaElement.appendChild(parentElement);
   parentElement.setAttribute('id', parentId);
   parentElement.setAttribute('class', "pt-4 mx-2");
- function checkArrayInObjects(arr) {
-  return arr.some(element => Object.values(element).some(e => Array.isArray(e)));
-}
+  function checkArrayInObjects(arr) {
+    return arr.some(element => Object.values(element).some(e => Array.isArray(e)));
+  }
   for (let item of items) {
     const childElement = document.createElement(item.element);
     if (!item.id) {
@@ -237,7 +247,7 @@ function displayResults(parentId, tagName, items) {
         setTimeout(() => {
           const resultsField = document.getElementById('resultsField');
           const content = item.content;
-          console.log(item);
+          //console.log(item);
           for (let c of content) {
             const grandChildElement = document.createElement(c.element);
             resultsField.appendChild(grandChildElement);
@@ -256,7 +266,7 @@ function displayResults(parentId, tagName, items) {
             else {
               if(checkArrayInObjects(content)) {
                 setTimeout(() => {
-                  console.log(c);
+                  //console.log(c);
                   const monthyPaymentField = document.getElementById('monthyPaymentField');
                   const monthyPayment = c.content;
                   for (let paymentNumbers of monthyPayment) {
@@ -271,11 +281,11 @@ function displayResults(parentId, tagName, items) {
                       grandGrandChildElement.appendChild(document.createTextNode(paymentNumbers.content));
                     }
                   }
-                },500)
+                },100)
               }
             }
           }
-        }, 500)
+        }, 100)
       }
     }
     parentElement.appendChild(childElement);
