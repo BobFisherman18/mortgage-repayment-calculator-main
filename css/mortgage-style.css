@@ -58,6 +58,11 @@ body #calculate input::-webkit-inner-spin-button {
 }
 body #calculate input[type=number] {
   -moz-appearance: textfield;
+  color: hsl(202, 55%, 16%);
+  font-weight: 700;
+}
+body #calculate .form-control:focus {
+  border-color: hsl(61, 70%, 52%);
 }
 body #calculate input[type=number], body #calculate .input-group-text {
   border-color: hsl(200, 26%, 54%);
@@ -68,14 +73,14 @@ body #calculate span:hover {
 body #calculate .input-group:focus-within {
   color: #212529;
   background-color: #fff;
-  border-color: #86b7fe;
+  border-color: hsl(61, 70%, 52%);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   z-index: 3;
   border-radius: 0.25rem;
 }
 body #calculate .input-group .form-control:focus {
   box-shadow: none !important;
+  border-color: hsl(61, 70%, 52%) !important;
 }
 body #calculate div.form-check > input[type=radio], body #calculate div.form-check {
   border: 1px solid hsl(200, 24%, 40%);
@@ -86,6 +91,11 @@ body #calculate div.form-check > label {
 }
 body #calculate .form-check:hover {
   border-color: hsl(61, 70%, 52%);
+}
+body #calculate input[type=radio]:checked {
+  border: none !important;
+  background-color: white;
+  background-image: url("../assets/images/radio-checked.svg");
 }
 body #calculate button {
   background-color: hsl(61, 70%, 52%);

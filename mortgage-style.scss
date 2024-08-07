@@ -74,6 +74,11 @@ body {
         /* Firefox: hide arrows */
         input[type="number"] {
             -moz-appearance: textfield;
+            color: $slate900;
+            font-weight: $h-weight;
+        }
+        .form-control:focus {
+            border-color: $lime;
         }
         input[type="number"], .input-group-text {
             border-color: $slate500;
@@ -84,15 +89,17 @@ body {
         .input-group:focus-within {
             color: #212529;
             background-color: #fff;
-            border-color: #86b7fe;
+            border-color: $lime;
             outline: 0;
-            box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+            //box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
             z-index: 3;
             border-radius: .25rem;
         }
         .input-group .form-control:focus {
             box-shadow: none !important;
+            border-color: $lime !important;
         }
+        
         div.form-check > input[type="radio"], div.form-check {
             border: 1px solid $slate700;
         }
@@ -102,6 +109,11 @@ body {
         }
         .form-check:hover {
             border-color: $lime;
+        }
+        input[type="radio"]:checked {
+            border: none !important;
+            background-color: white;
+            background-image: url("../assets/images/radio-checked.svg");
         }
         button {
             background-color: $lime;

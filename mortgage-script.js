@@ -30,7 +30,7 @@ const resultsContent = [
           { element: 'h1', id: 'monthlyPayments', class: 'mb-3', content: `` }
       ]},
       { element: 'h6', class: 'mt-3', content: "Total you'll repay over the term"},
-      {element: 'h3', id: 'termPayments', content: '£539,622.26'}
+      {element: 'h3', id: 'termPayments', content: ''}
     ]}
 ];
 class mortgageObject {
@@ -205,17 +205,26 @@ function calculateMortgage(mort) {
   let r = percentToDeci / 12;
   let n = mort.mortTerm * 12;
   let M = p * [r * (1 + r) ** n] / [(1 + r)**n - 1];
-  let monthlyPayment = M.toLocaleString('en-US', {
+  let total = M * 12 * mort.mortTerm;
+  let monthlyPayment = toNumberString(M);
+  let totalPayment = toNumberString(total);
+  monthyPayments(monthlyPayment);
+  totalPayments(totalPayment);
+}
+function toNumberString(num) {
+  return num.toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
-  console.log(monthlyPayment);
-  monthyPayments(monthlyPayment);
 }
-
-function monthyPayments(some) {
+function totalPayments(tot) {
   setTimeout(() => {
-    document.getElementById('monthlyPayments').innerHTML = '£' + some;
+    document.getElementById('termPayments').innerHTML =  '£' + tot;
+  }, 230)
+}
+function monthyPayments(month) {
+  setTimeout(() => {
+    document.getElementById('monthlyPayments').innerHTML = '£' + month;
   },230);
 }
 
