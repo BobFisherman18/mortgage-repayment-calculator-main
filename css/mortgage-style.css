@@ -45,6 +45,15 @@ body #calculate .errorStates {
   font-weight: 500;
   font-size: small;
 }
+body #calculate .focusSpan {
+  color: hsl(202, 55%, 16%);
+  border-color: hsl(61, 70%, 52%) !important;
+  background-color: hsl(61, 70%, 52%);
+}
+body #calculate .mortgageType {
+  border-color: hsl(61, 70%, 52%) !important;
+  background-color: hsla(61, 70%, 52%, 0.25);
+}
 body #calculate #amount {
   border-left: none;
 }
@@ -166,6 +175,14 @@ body #results #resultsCompletedField section #termPayments {
   #mortgage #calculate #termAndRateField {
     display: flex;
     justify-content: space-around;
+  }
+  #mortgage #calculate #termAndRateField #termField {
+    width: 120px;
+    margin-left: -15px;
+  }
+  #mortgage #calculate #termAndRateField #rateField {
+    width: 100px;
+    margin-right: -15px;
   }
   #mortgage #calculate button img {
     right: 35px;

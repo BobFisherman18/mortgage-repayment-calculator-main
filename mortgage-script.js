@@ -65,24 +65,73 @@ function sortInputs() {
 }
 const sortedInputs = sortInputs();
 
-function hover(inputStates) {
-  for (let x of inputStates) {
-    x.addEventListener('mouseenter', () => {
-        for (let i of inputStates) {
-          i.style.borderColor = hoverStates.get('slate900');
-      }
+ function hover(inputStates) {
+  let tag = inputStates[0].tagName;
+  tag === 'SPAN' ? [inputStates[0], inputStates[1]] = [inputStates[1], inputStates[0]]: 
+                   [inputStates[0], inputStates[1]] = [inputStates[0], inputStates[1]];
+  let[input, span] = inputStates;
+  input.addEventListener('mouseenter', (element) => {
+    element.target.style.borderColor = hoverStates.get('slate900');
+    span.style.borderColor = hoverStates.get('slate900');
+    
+    element.target.addEventListener('focusin', () => {
+      span.classList.add('focusSpan');
     });
-    x.addEventListener('mouseleave', () => {
-      for (let i of inputStates) {
-        i.style.borderColor = noErrors.get('slate500');
-      }
-
+    element.target.addEventListener('focusout', () => {
+      span.classList.remove('focusSpan');
     });
-  }
-}
+  }); 
+  input.addEventListener('mouseleave', (element) => {
+    element.target.style.borderColor = noErrors.get('slate500');
+    span.style.borderColor = noErrors.get('slate500');
+  }); 
+ }
 hover(sortedInputs.amount);
 hover(sortedInputs.term);
 hover(sortedInputs.rate);
+
+function switchMortgageType() {
+  const mortgageTypes = Array.from(inputValidity).slice(3);
+  let [repay, interest] = mortgageTypes;
+  for (let o of mortgageTypes) {
+    o.addEventListener('click', (element) => {
+      let parent = element.target.parentElement;
+      let id = element.target.id;
+        switch(id) {
+          case 'repay':
+            parent.classList.add('mortgageType');
+            interest.parentElement.classList.remove('mortgageType');
+            break;
+          case 'interest':
+            parent.classList.add('mortgageType');
+            repay.parentElement.classList.remove('mortgageType');
+            break;
+         }
+      })
+    }
+  }
+
+switchMortgageType();
+
+
+function clearFields() {
+  const clearAll = document.querySelector('input[type = "reset"]');
+  clearAll.addEventListener('click', () => {
+    for (let clear of inputValidity) {
+      switch (clear.type) {
+        case "number":
+          clear.value = "";
+          break;
+        case "radio":
+          clear.checked = false;
+          clear.parentElement.classList.remove('mortgageType');
+          break;
+      }
+    }
+  })
+}
+clearFields();
+
 
 function checkFields() {
   checkNumbers();
