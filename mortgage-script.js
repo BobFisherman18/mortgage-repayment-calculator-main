@@ -26,7 +26,7 @@ const resultsContent = [
     content: [
       { element: 'div', class: 'border-bottom border-2', id: 'monthyPaymentField', 
         content: [
-          { element: 'h6', class: 'mt-2', content: "Your monthly repayments" },
+          { element: 'h6', class: 'mt-2', id:"monthlyHeader", content: "Your monthly repayments" },
           { element: 'h1', id: 'monthlyPayments', class: 'mb-3', content: `` }
       ]},
       { element: 'h6', class: 'mt-3', content: "Total you'll repay over the term"},

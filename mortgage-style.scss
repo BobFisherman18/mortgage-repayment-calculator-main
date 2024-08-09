@@ -71,10 +71,10 @@ body {
             background-color: $mortgageTypeColor;
         }
         #amount {
-            border-left: none;
+            border-left: none !important;
         }
         #term, #rate {
-            border-right: none;
+            border-right: none !important;
         }
         /* Chrome, Safari, Edge, Opera: hide arrows */
         input::-webkit-outer-spin-button,
@@ -170,11 +170,12 @@ body {
                     #monthlyPayments {
                         color: $lime;
                         font-weight: $h-weight;
-                        font-size: 35px;
+                        font-size: 40px;
                     }
                  }
                 #termPayments {
                     color: $white; 
+                    font-weight: $h-weight;
                 }
             }
         }
@@ -228,18 +229,40 @@ body {
             margin-left: -75px;
             border-top-right-radius: $radiusSize;
             border-bottom-right-radius: $radiusSize;
+            #resultsCompletedField {
+                position: relative;
+                bottom: 20px;
+            }
+        }
+    }
+}
+@media screen and (min-width: 581px) {
+    #results {
+        #resultsCompletedField {
+            position: relative;
+            top: -35px !important;
+            bottom: 35px !important;
+        }
+    }
+}
+@media screen and (min-width: 590px) {
+    #results {
+        #resultsCompletedField {
+            position: relative;
+            top: -45px !important;
+            bottom: 45px !important;
         }
     }
 }
 @media screen and (min-width: 627px) {
-    #mortgage {
+
         #calculate {
             #termField {
-                width: 47.5%;
+                width: 47.5% !important;
                 margin-left: -7px;
             }
             #rateField {
-                width: 47.5%;
+                width: 47.5% !important;
                 margin-right: -7px;
             }
             img {
@@ -250,7 +273,14 @@ body {
                 right: 2px !important;
             }
          }
-    }
+         #results {
+            #resultsCompletedField {
+                position: relative;
+                top: -32px !important;
+                bottom: 32px !important;
+            }
+        }
+
 }
 @media screen and (min-width: 696px) {
     button {
@@ -266,8 +296,33 @@ body {
         width: 48% !important;
         margin-right: -7px;
     }
-    
+    #results {
+        #resultsCompletedField {
+            position: relative;
+            top: -8px !important;
+            bottom: 8px !important;
+            #resultsField {
+                #monthlyPayments {
+                    font-size: 55px !important;
+                    margin-bottom: 30px !important;
+                    }
+                    h6.mt-3 {
+                        margin-top: 35px !important;
+                    }
+                }
+            }
+        }
+    }
+@media screen and (min-width: 823px) {
+    #results {
+        #resultsCompletedField {
+            position: relative;
+            top: -20px !important;
+            bottom: 20px !important;
+        }
+    }
 }
+
 @media screen and (min-width: 840px) { 
     #headAndResetField {
         justify-content: space-between !important;
