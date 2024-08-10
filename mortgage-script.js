@@ -155,6 +155,30 @@ function createMortgageObject() {
   const mortgage = new mortgageObject(amount, term, rate, radio);
   return mortgage;
 }
+function onlyNumbers() {
+  
+}
+onlyNumbers();
+/*
+function addCommasToNumbers() {
+  console.log(inputValidity);
+  const numbersTypes = Array.from(inputValidity).slice(0,3);
+  console.log(numbersTypes);
+  for (number of numbersTypes) {
+    let value = number.value;
+    console.log(number);
+    number.addEventListener('keyup', (element) => {
+      console.log(element);
+      let value = element.target.value;
+      let length = value.length;
+      console.log(value);
+      console.log(length);
+      
+    })
+  }
+}
+addCommasToNumbers();
+*/
 
 function checkNumbers() {
   const arr = [];
