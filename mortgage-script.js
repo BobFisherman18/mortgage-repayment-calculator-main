@@ -1,9 +1,11 @@
 const errorFields = document.querySelectorAll('p.errorStates');
 const inputHoverStates = document.querySelectorAll('.hover');
-const inputValidity = document.querySelectorAll("input[type='number'], input[type='radio']");
+const inputValidity = document.querySelectorAll("input[type='text'], input[type='number'], input[type='radio']");
 let text = `Your results are shown below based on the information you provided. 
             To adjust the results, edit the form and click  "calculate repayments" 
             again.`
+
+console.log(inputValidity);
 const noErrors = new Map([
     ['slate500', 'hsl(200, 26%, 54%)']
 ]);
@@ -119,6 +121,9 @@ function clearFields() {
   clearAll.addEventListener('click', () => {
     for (let clear of inputValidity) {
       switch (clear.type) {
+        case 'text':
+          clear.value = "";
+          break;
         case "number":
           clear.value = "";
           break;
@@ -155,30 +160,17 @@ function createMortgageObject() {
   const mortgage = new mortgageObject(amount, term, rate, radio);
   return mortgage;
 }
-function onlyNumbers() {
-  
-}
-onlyNumbers();
-/*
-function addCommasToNumbers() {
-  console.log(inputValidity);
-  const numbersTypes = Array.from(inputValidity).slice(0,3);
-  console.log(numbersTypes);
-  for (number of numbersTypes) {
-    let value = number.value;
-    console.log(number);
-    number.addEventListener('keyup', (element) => {
-      console.log(element);
-      let value = element.target.value;
-      let length = value.length;
-      console.log(value);
-      console.log(length);
-      
-    })
+function checkCommas(value) {
+  let commas = /,/g;
+  let isThereComma = commas.test(value);
+  if (isThereComma === true) {
+    let replace = value.replace(commas, "");
+    return Number(replace);
+  } else {
+    return Number(value);
   }
+
 }
-addCommasToNumbers();
-*/
 
 function checkNumbers() {
   const arr = [];
@@ -191,7 +183,8 @@ function checkNumbers() {
       c.classList.forEach((el) => {
         let tagName = c.tagName;
           if (el.startsWith("amountField")) {
-            let amountNum = Number(c.value);
+            let amountNum = checkCommas(c.value);
+            console.log
             switch (tagName) {
               case "INPUT":
                 let previousElementClass = c.previousElementSibling.classList;
@@ -300,10 +293,17 @@ function monthyPayments(month) {
     document.getElementById('monthlyPayments').innerHTML = '£' + month;
   },230);
 }
-
+function removeDisplayResults() {
+  let hasRun = false;
+  if (!hasRun) {
+    document.getElementById('resultsEmptyField').remove();
+    hasRun = true;
+    return hasRun;
+  }
+}
 
 function displayResults(parentId, tagName, items) {
-  document.getElementById('resultsEmptyField').remove();
+  removeDisplayResults();
   const granpaElement = document.getElementById('results');
   const parentElement = document.createElement(tagName);
   granpaElement.appendChild(parentElement);

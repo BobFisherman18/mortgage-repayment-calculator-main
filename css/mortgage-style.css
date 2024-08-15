@@ -54,10 +54,10 @@ body #calculate .mortgageType {
   border-color: hsl(61, 70%, 52%) !important;
   background-color: hsla(61, 70%, 52%, 0.25);
 }
-body #calculate #amount {
+body #calculate #amount, body #calculate #year, body #calculate #percent {
   border-left: none !important;
 }
-body #calculate #term, body #calculate #rate {
+body #calculate #term, body #calculate #rate, body #calculate #currency {
   border-right: none !important;
 }
 body #calculate input::-webkit-outer-spin-button,
@@ -67,6 +67,11 @@ body #calculate input::-webkit-inner-spin-button {
 }
 body #calculate input[type=number] {
   -moz-appearance: textfield;
+  color: hsl(202, 55%, 16%);
+  font-weight: 700;
+}
+body #calculate input[type=text] {
+  border-color: hsl(200, 26%, 54%);
   color: hsl(202, 55%, 16%);
   font-weight: 700;
 }
@@ -270,6 +275,11 @@ body #results #resultsCompletedField section #termPayments {
   }
   #results #resultsCompletedField #resultsField h6.mt-3 {
     margin-top: 35px !important;
+  }
+}
+@media screen and (min-width: 793px) {
+  input[type=reset] {
+    text-decoration: underline !important;
   }
 }
 @media screen and (min-width: 823px) {

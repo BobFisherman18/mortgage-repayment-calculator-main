@@ -70,12 +70,13 @@ body {
             border-color: $lime !important;
             background-color: $mortgageTypeColor;
         }
-        #amount {
+        #amount, #year, #percent {
             border-left: none !important;
         }
-        #term, #rate {
+        #term, #rate, #currency {
             border-right: none !important;
         }
+        
         /* Chrome, Safari, Edge, Opera: hide arrows */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -88,6 +89,11 @@ body {
             color: $slate900;
             font-weight: $h-weight;
         }
+        input[type='text'] {
+            border-color: $slate500;
+            color: $slate900;
+            font-weight: $h-weight;
+        } 
         .form-control:focus {
             border-color: $lime;
         }
@@ -305,14 +311,19 @@ body {
                 #monthlyPayments {
                     font-size: 55px !important;
                     margin-bottom: 30px !important;
-                    }
-                    h6.mt-3 {
-                        margin-top: 35px !important;
-                    }
+                }
+                h6.mt-3 {
+                    margin-top: 35px !important;
                 }
             }
         }
     }
+}
+@media screen and (min-width: 793px) {
+    input[type='reset'] {
+        text-decoration: underline !important;
+    }
+}
 @media screen and (min-width: 823px) {
     #results {
         #resultsCompletedField {
